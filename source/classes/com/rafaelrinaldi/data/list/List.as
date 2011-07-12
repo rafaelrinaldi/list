@@ -15,6 +15,7 @@ package com.rafaelrinaldi.data.list
 	 * • You can reset a list and start from scratch if needed.
 	 * • Chaining for fast adding/removing items.
 	 * • Match items by id or value.
+	 * • Option to restrict values by object type.
 	 * 
 	 * @example
 	 * <pre>
