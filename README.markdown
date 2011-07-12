@@ -10,6 +10,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - You can reset a list and start from scratch if needed.
 - Chaining for fast adding/removing items.
 - Match items by id or value.
+- Option to restrict values by object type.
 
 ## API
 - `add` - Add a new list entry.
@@ -17,6 +18,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `item` - Get a single item.
 - `group` - Get a group item.
 - `match` - Match some id or value.
+- `restrict` - A `Vector.<Class>` to restrict values by object type.
 - `reset` - Start from scratch.
 - `length` - List length.
 - `dispose` - Clear from memory.
