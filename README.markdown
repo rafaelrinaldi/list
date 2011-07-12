@@ -1,4 +1,4 @@
-[license]: list/blob/master/license.txt
+[license]: http://github.com/rafaelrinaldi/list/blob/master/license.txt
 
 # list
 Handy way to manipulate lists with ActionScript 3.0.
