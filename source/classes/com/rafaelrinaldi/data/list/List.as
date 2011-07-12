@@ -69,6 +69,18 @@ package com.rafaelrinaldi.data.list
 	 * locales.allowOverride = false;
 	 * locales.add("en_US", "Baconenglish");
 	 * trace(locales.item("en_US")); // American English
+	 * 
+	 * // Creating a list with restrictions.
+	 * var restricted : List = new List;
+	 * restricted.restrict.push(String);
+	 * restricted.add("string", "I'm a String");
+	 * restricted.add("number", 2011);
+	 * restricted.add("boolean", false);
+	 * 
+	 * // Trying to get these items.
+	 * trace(restricted.item("string")); // I'm a String
+	 * trace(restricted.item("number")); // null
+	 * trace(restricted.item("boolean")); // null
 	 * </pre>  
 	 *
 	 * @author Rafael Rinaldi (rafaelrinaldi.com)
@@ -79,8 +91,12 @@ package com.rafaelrinaldi.data.list
 	{
 		// Single items list.
 		public var items : Dictionary;
+		
 		// Group items list.
 		public var groups : Dictionary;
+		
+		// Restrict values.
+		public var restrict : Vector.<Class>;
 		
 		public var id : String;
 		public var allowOverride : Boolean;
@@ -98,6 +114,8 @@ package com.rafaelrinaldi.data.list
 			// Enable week keys by default.
 			items = new Dictionary(true);
 			groups = new Dictionary(true);
+			
+			restrict = new Vector.<Class>();
 		}
 		
 		/**
@@ -107,6 +125,16 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function add( p_id : String, p_value : * ) : List
 		{
+			if(restrict.length > 0) {
+				
+				const valid : Boolean = restrict.some(function( p_klass : Class, ...rest ) : Boolean {
+					return p_value is p_klass;
+				});
+				
+				if(!valid) return this;
+				
+			}
+			
 			if(!allowOverride) {
 				if(!items.hasOwnProperty(p_id)) items[p_id] = new ListItem(p_value);
 			} else {
@@ -208,6 +236,9 @@ package com.rafaelrinaldi.data.list
 		public function dispose() : void
 		{
 			reset(true);
+			
+			restrict.length = 0;
+			restrict = null;
 			
 			items = null;
 			groups = null;
