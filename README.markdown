@@ -1,4 +1,4 @@
-[license]: license.txt
+[license]: list/license.txt
 
 # list
 Handy way to manipulate lists with ActionScript 3.0.
