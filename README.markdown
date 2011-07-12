@@ -5,8 +5,8 @@ Handy way to manipulate lists with ActionScript 3.0.
 
 ## Features
 - Single and group items manipulation.
-- Overriding control.
-- Each entry is mapped with an `String` id. Nothing is anonymous.
+- Overriding control.
+- Each entry is mapped with an `String` id. Nothing is anonymous.
 - You can reset a list and start from scratch if needed.
 - Chaining for fast adding/removing items.
 - Match items by id or value.
