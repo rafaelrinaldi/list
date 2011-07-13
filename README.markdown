@@ -3,7 +3,7 @@
 # list
 Handy way to manipulate lists with ActionScript 3.0.
 
-## Features
+#### Features
 - Single and group items manipulation.
 - Overriding control.
 - Each entry is mapped with an `String` id. Nothing is anonymous.
@@ -12,7 +12,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - Match items by id or value.
 - Option to restrict values by object type.
 
-## API
+#### API
 - `add` - Add a new list entry.
 - `remove` - Remove a list entry.
 - `item` - Get a single item.
@@ -23,5 +23,70 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `length` - List length.
 - `dispose` - Clear from memory.
 
-## License
+#### Usage
+	import com.rafaelrinaldi.data.list.List;
+	import flash.display.Bitmap;
+	
+	// A random bitmap instance.
+	var bitmapInstance : Bitmap = new Bitmap;
+	
+	// Starting the list with the id "generic".
+	var generic : List = new List("generic");
+	 
+	// Adding some stuff.
+	generic.add("pi", Math.PI);
+	generic.add("max", int.MAX_VALUE);
+	generic.add("bitmap", bitmapInstance);
+	 
+	// Getting items.
+	trace(generic.item("pi")); // 3.141592653589793
+	trace(generic.item("max")); // 2147483647
+	trace(generic.item("bitmap")); // [object Bitmap]
+	 
+	// Matching the id "pi".
+	trace(generic.match("pi")); // true
+	// Matching the Bitmap instance.
+	trace(generic.match(bitmapInstance)); // true
+	// Matching something invalid.
+	trace(generic.match("foo")); // false
+	 
+	// Using groups.
+	var locales : List = generic.group("locales");
+	 
+	// Using the chain.
+	locales.add("pt_BR", "Brazilian Portuguese").add("en_US", "American English").add("it", "Italian");
+	
+	// Getting items.
+	trace(locales.item("pt_BR")); // Brazilian Portuguese
+	trace(locales.item("en_US")); // American English
+	trace(locales.item("it")); // Italian
+	
+	// Removing an item.
+	locales.remove("it");
+	
+	// Trying to get the removed item.
+	trace(locales.item("it")); // null
+	
+	// Overriding an item and getting him.
+	locales.add("it", "Pizzalian");
+	trace(locales.item("it")); // Pizzalian
+	 		
+	// Disabling override and testing it.
+	locales.allowOverride = false;
+	locales.add("en_US", "Baconenglish");
+	trace(locales.item("en_US")); // American English
+	
+	// Creating a list with restrictions.
+	var restricted : List = new List;
+	restricted.restrict.push(String);
+	restricted.add("string", "I'm a String");
+	restricted.add("number", 2011);
+	restricted.add("boolean", false);
+	
+	// Trying to get these items.
+	trace(restricted.item("string")); // I'm a String
+	trace(restricted.item("number")); // null
+	trace(restricted.item("boolean")); // null
+
+#### License
 [WTFPL][license]
