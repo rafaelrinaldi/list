@@ -1,4 +1,5 @@
 [license]: http://github.com/rafaelrinaldi/list/blob/master/license.txt
+[printf]: http://github.com/arthur-debert/printf-as3
 
 # list
 Handy way to manipulate lists with ActionScript 3.0.
@@ -12,6 +13,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - Chaining for fast adding/removing items.
 - Match items by id or value.
 - Option to restrict values by object type.
+- [printf][printf] support.
 
 ---
 ### API
@@ -29,6 +31,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 ### Usage
 	import com.rafaelrinaldi.data.list.List;
 	import flash.display.Bitmap;
+	import printf;
 	
 	// A random bitmap instance.
 	var bitmapInstance : Bitmap = new Bitmap;
@@ -90,6 +93,16 @@ Handy way to manipulate lists with ActionScript 3.0.
 	trace(restricted.item("string")); // I'm a String
 	trace(restricted.item("number")); // null
 	trace(restricted.item("boolean")); // null
+	
+	// Dynamic variables using printf.
+	var credentials : List = new List;
+	credentials.add("name", "Rafael");
+	credentials.add("surname", "Rinaldi");
+	credentials.add("age", 21);
+	credentials.add("website", "http://rafaelrinaldi.com");
+	credentials.add("hi", "Hi! My name is %(name)s %(surname)s, %(age)s years old. You can see my works here: %(website)s");
+	 	
+	trace(credentials.item("hi")); // Hi! My name is Rafael Rinaldi, 21 years old. You can see my works here: http://rafaelrinaldi.com
 
 ---
 ### License

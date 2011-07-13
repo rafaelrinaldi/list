@@ -1,7 +1,6 @@
 package com.rafaelrinaldi.data.list
 {
 	import com.rafaelrinaldi.abstract.IDisposable;
-
 	import flash.utils.Dictionary;
 	/**
 	 * 
@@ -16,6 +15,7 @@ package com.rafaelrinaldi.data.list
 	 * • Chaining for fast adding/removing items.
 	 * • Match items by id or value.
 	 * • Option to restrict values by object type.
+	 * • printf support.
 	 * 
 	 * @example
 	 * <pre>
@@ -82,6 +82,16 @@ package com.rafaelrinaldi.data.list
 	 * trace(restricted.item("string")); // I'm a String
 	 * trace(restricted.item("number")); // null
 	 * trace(restricted.item("boolean")); // null
+	 * 
+	 * // Dynamic variables using printf.
+	 * var credentials : List = new List;
+	 * credentials.add("name", "Rafael");
+	 * credentials.add("surname", "Rinaldi");
+	 * credentials.add("age", 21);
+	 * credentials.add("website", "http://rafaelrinaldi.com");
+	 * credentials.add("hi", "Hi! My name is %(name)s %(surname)s, %(age)s years old. You can see my works here: %(website)s");
+	 *		
+	 * trace(credentials.item("hi")); // Hi! My name is Rafael Rinaldi, 21 years old. You can see my works here: http://rafaelrinaldi.com
 	 * </pre>  
 	 *
 	 * @author Rafael Rinaldi (rafaelrinaldi.com)
@@ -165,7 +175,8 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function item( p_id : String ) : *
 		{
-			return items.hasOwnProperty(p_id) ? ListItem(items[p_id]).value : null;
+			const value : * = ListItem(items[p_id]).value;
+			return items.hasOwnProperty(p_id) ? printf(value, items) : null;
 		}
 
 		/**
