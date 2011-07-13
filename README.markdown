@@ -92,5 +92,5 @@ Handy way to manipulate lists with ActionScript 3.0.
 	trace(restricted.item("boolean")); // null
 
 ---
-#### License
+### License
 [WTFPL][license]
