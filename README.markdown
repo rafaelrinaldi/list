@@ -3,7 +3,8 @@
 # list
 Handy way to manipulate lists with ActionScript 3.0.
 
-#### Features
+---
+### Features
 - Single and group items manipulation.
 - Overriding control.
 - Each entry is mapped with an `String` id. Nothing is anonymous.
@@ -12,7 +13,8 @@ Handy way to manipulate lists with ActionScript 3.0.
 - Match items by id or value.
 - Option to restrict values by object type.
 
-#### API
+---
+### API
 - `add` - Add a new list entry.
 - `remove` - Remove a list entry.
 - `item` - Get a single item.
@@ -23,7 +25,8 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `length` - List length.
 - `dispose` - Clear from memory.
 
-#### Usage
+---
+### Usage
 	import com.rafaelrinaldi.data.list.List;
 	import flash.display.Bitmap;
 	
@@ -88,5 +91,6 @@ Handy way to manipulate lists with ActionScript 3.0.
 	trace(restricted.item("number")); // null
 	trace(restricted.item("boolean")); // null
 
+---
 #### License
 [WTFPL][license]
