@@ -24,6 +24,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `group` - Get a group item.
 - `match` - Match some id or value.
 - `restrict` - A `Vector.<Class>` to restrict values by object type.
+- `from` - Feed the list with XML data.
 - `reset` - Start from scratch.
 - `length` - List length.
 - `dispose` - Clear from memory.
