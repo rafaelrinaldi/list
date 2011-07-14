@@ -14,6 +14,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - Match items by id or value.
 - Option to restrict values by object type.
 - [printf][printf] support.
+- You can feed the list with XML.
 
 ---
 ### API
@@ -31,7 +32,6 @@ Handy way to manipulate lists with ActionScript 3.0.
 ### Usage
 	import com.rafaelrinaldi.data.list.List;
 	import flash.display.Bitmap;
-	import printf;
 	
 	// A random bitmap instance.
 	var bitmapInstance : Bitmap = new Bitmap;
@@ -103,6 +103,40 @@ Handy way to manipulate lists with ActionScript 3.0.
 	credentials.add("hi", "Hi! My name is %(name)s %(surname)s, %(age)s years old. You can see my works here: %(website)s");
 	 	
 	trace(credentials.item("hi")); // Hi! My name is Rafael Rinaldi, 21 years old. You can see my works here: http://rafaelrinaldi.com
+	
+	// Feeding with XML data.
+	var colorsXML : XML = new XML(
+	
+	 <list id="colors">
+	 
+	 	<group id="primary">
+	 		<item id="yellow">#FFCC00</item>
+	 		<item id="blue">#6699FF</item>
+	 	</group>
+	 	
+	 	<group id="secondary">
+	 		<item id="green">#66CC00</item>
+	 		<item id="orange">#FF6600</item>
+	 	</group>
+	 	
+	 	<item id="black">#000000</item>
+	 	<item id="white">#FFFFFF</item>
+	 	
+	 </list>
+	 
+	);
+	
+	var colors : List = new List;
+	colors.from(colorsXML);
+	
+	trace(colors.item("black")); // #000000
+	trace(colors.item("white")); // #FFFFFF
+	
+	trace(colors.group("primary").item("yellow")); // #FFCC00
+	trace(colors.group("primary").item("blue")); // #6699FF
+	
+	trace(colors.group("secondary").item("green")); // #66CC00
+	trace(colors.group("secondary").item("orange")); // #FF6600
 
 ---
 ### License

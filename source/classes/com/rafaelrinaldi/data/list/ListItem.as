@@ -51,7 +51,7 @@ package com.rafaelrinaldi.data.list
 		
 		public function toString() : String
 		{
-			return "[object ListItem] " + value;
+			return value;
 		}
 	}
 }

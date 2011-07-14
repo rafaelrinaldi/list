@@ -16,6 +16,7 @@ package com.rafaelrinaldi.data.list
 	 * • Match items by id or value.
 	 * • Option to restrict values by object type.
 	 * • printf support.
+	 * • You can feed the list with XML.
 	 * 
 	 * @example
 	 * <pre>
@@ -92,6 +93,40 @@ package com.rafaelrinaldi.data.list
 	 * credentials.add("hi", "Hi! My name is %(name)s %(surname)s, %(age)s years old. You can see my works here: %(website)s");
 	 *		
 	 * trace(credentials.item("hi")); // Hi! My name is Rafael Rinaldi, 21 years old. You can see my works here: http://rafaelrinaldi.com
+	 * 
+	 * // Feeding with XML data.
+	 * var colorsXML : XML = new XML(
+	 *
+	 *	<list id="colors">
+	 *	
+	 *		<group id="primary">
+	 *			<item id="yellow">#FFCC00</item>
+	 *			<item id="blue">#6699FF</item>
+	 *		</group>
+	 *		
+	 *		<group id="secondary">
+	 *			<item id="green">#66CC00</item>
+	 *			<item id="orange">#FF6600</item>
+	 *		</group>
+	 *		
+	 *		<item id="black">#000000</item>
+	 *		<item id="white">#FFFFFF</item>
+	 *		
+	 *	</list>
+	 *	
+	 * );
+	 *
+	 * var colors : List = new List;
+	 * colors.from(colorsXML);
+	 *
+	 * trace(colors.item("black")); // #000000
+	 * trace(colors.item("white")); // #FFFFFF
+	 *
+	 * trace(colors.group("primary").item("yellow")); // #FFCC00
+	 * trace(colors.group("primary").item("blue")); // #6699FF
+	 *
+	 * trace(colors.group("secondary").item("green")); // #66CC00
+	 * trace(colors.group("secondary").item("orange")); // #FF6600
 	 * </pre>  
 	 *
 	 * @author Rafael Rinaldi (rafaelrinaldi.com)
@@ -128,7 +163,33 @@ package com.rafaelrinaldi.data.list
 			
 			restrict = new Vector.<Class>();
 		}
-		
+
+		public function from( p_xml : XML ) : void
+		{
+			if(p_xml == null) return;
+			
+			var node : XML;
+			
+			id = p_xml.attribute("id");
+			
+			getItemsFrom(p_xml.child("item"));
+			
+			for each(node in p_xml.child("group")) {
+				getItemsFrom(node.child("item"), node.attribute("id"));
+			}
+			
+			function getItemsFrom( p_node : XMLList, p_group : String = null ) : void {
+				
+				for each(var node : XML in p_node) {
+					if(p_group == null)
+						add(node.attribute("id"), node.text());
+					else
+						group(p_group).add(node.attribute("id"), node.text());
+				}
+				
+			}
+		}
+
 		/**
 		 * @param p_id New item id.
 		 * @param p_value New item value.
@@ -175,8 +236,7 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function item( p_id : String ) : *
 		{
-			const value : * = ListItem(items[p_id]).value;
-			return items.hasOwnProperty(p_id) ? printf(value, items) : null;
+			return items.hasOwnProperty(p_id) ? printf(ListItem(items[p_id]).value, items) : null;
 		}
 
 		/**
