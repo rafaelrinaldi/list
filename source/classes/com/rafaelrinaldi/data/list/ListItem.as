@@ -14,14 +14,16 @@ package com.rafaelrinaldi.data.list
 	 */
 	public class ListItem implements IDisposable
 	{
+		public var id : String;
 		public var value : *;
 		
 		/**
 		 * @param p_value Item value.
 		 */
-		public function ListItem( p_value : * = null )
+		public function ListItem( p_id : String, p_value : * = null )
 		{
-			if(p_value != null) value = p_value;
+			id = p_id;
+			value = p_value;
 		}
 		
 		/**
