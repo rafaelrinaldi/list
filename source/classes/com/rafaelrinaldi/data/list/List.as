@@ -11,8 +11,6 @@ package com.rafaelrinaldi.data.list
 	 * @since Jul 8, 2011
 	 *
 	 */
-	// TODO: Item id should be an option. User can be able to add an item without adding an id since I have the match by id or type.
-	// TODO: Search can be also by index.
 	public class List implements IDisposable
 	{
 		// Single items list.
@@ -23,6 +21,9 @@ package com.rafaelrinaldi.data.list
 		
 		// Restrict values.
 		public var restrict : Vector.<Class>;
+		
+		// All registered ids.
+		public var ids : Vector.<String>;
 		
 		public var id : String;
 		public var allowOverride : Boolean;
@@ -41,6 +42,8 @@ package com.rafaelrinaldi.data.list
 			groups = new Dictionary(true);
 			
 			restrict = new Vector.<Class>();
+			
+			ids = new Vector.<String>();
 		}
 
 		/**
@@ -131,6 +134,8 @@ package com.rafaelrinaldi.data.list
 				items[p_id] = new ListItem(p_id, p_value);
 			}
 			
+			if(ids.indexOf(p_id) < 0) ids.push(p_id);
+			
 			return this;
 		}
 
@@ -143,6 +148,9 @@ package com.rafaelrinaldi.data.list
 			if(items.hasOwnProperty(p_id)) {
 				ListItem(items[p_id]).dispose(); // Try to clean the object.
 				delete items[p_id]; // Remove Dictionary reference.
+				
+				// Removing id from ids list.
+				ids.splice(ids.indexOf(p_id), 1);
 			}
 			
 			return this;
@@ -166,6 +174,15 @@ package com.rafaelrinaldi.data.list
 			// If there's no group with passed id, create a new one.
 			if(!groups.hasOwnProperty(p_id)) groups[p_id] = new List(p_id);
 			return groups[p_id];
+		}
+
+		/**
+		 * @param p_index Item index.
+		 * @return Item value based on his index.
+		 */
+		public function index( p_index : int ) : *
+		{
+			return items[ids[p_index]];
 		}
 
 		/**
@@ -204,7 +221,12 @@ package com.rafaelrinaldi.data.list
 		{
 			clearList(items);
 			
-			if(p_everything) clearList(groups);
+			ids.length = 0;
+			
+			if(p_everything) {
+				ids = null;
+				clearList(groups);
+			}
 			
 			return this;
 		}

@@ -17,6 +17,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - You can feed the list with XML.
 - You can export the list as XML.
 - Clone and merge support.
+- `List` is based on `String` ids but also have an index search/matching.
 
 ---
 ### API
@@ -29,6 +30,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `remove` - Remove a list entry.
 - `item` - Get a single item.
 - `group` - Get a group item.
+- `index` - Get an item based on a numeric index.
 - `match` - Match some id or value.
 - `reset` - Start from scratch.
 - `length` - List length.
