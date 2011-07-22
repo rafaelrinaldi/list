@@ -32,7 +32,10 @@ package com.rafaelrinaldi.data.list
 			var group : String;
 			
 			list.id = p_data.attribute("id");
-			list.allowOverride = toBoolean(p_data.attribute("allowOverride"));
+			
+			if(p_data.hasOwnProperty("@allowOverride")) {
+				list.allowOverride = toBoolean(p_data.attribute("allowOverride"));
+			}
 			
 			// Parsing restrictions.
 			for each(node in p_data.child("restrict").children()) {
@@ -59,7 +62,6 @@ package com.rafaelrinaldi.data.list
 				
 				group = node.attribute("id");
 				
-				//FIXME: By default the 'allowOverride' is the same as root List. Find a way to make it by group as well.
 				if(node.hasOwnProperty("@allowOverride")) {
 					list.group(group).allowOverride = toBoolean(node.attribute("allowOverride"));
 				}
@@ -69,6 +71,7 @@ package com.rafaelrinaldi.data.list
 					list.group(group).add(child.attribute("id"), toNative(child.text()));
 					
 				}
+				
 				
 			}
 			

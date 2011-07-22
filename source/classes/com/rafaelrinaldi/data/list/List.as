@@ -81,6 +81,8 @@ package com.rafaelrinaldi.data.list
 			var list : List;
 			var dictionary : Dictionary;
 			
+			allowOverride = p_list.allowOverride;
+			
 			// Merging restrict list.
 			p_list.restrict.forEach(function( p_type : *, ...rest ) : void {
 				if(restrict.indexOf(p_type) < 0) restrict.push(p_type);
@@ -97,6 +99,9 @@ package com.rafaelrinaldi.data.list
 			dictionary = p_list.groups;
 			
 			for each(list in dictionary) {
+				
+				group(list.id).allowOverride = list.allowOverride;
+				
 				for each(item in list.items) {
 					group(list.id).add(item.id, item.value);
 				}
@@ -159,7 +164,7 @@ package com.rafaelrinaldi.data.list
 		public function group( p_id : String ) : List
 		{
 			// If there's no group with passed id, create a new one.
-			if(!groups.hasOwnProperty(p_id)) groups[p_id] = new List(p_id, allowOverride);
+			if(!groups.hasOwnProperty(p_id)) groups[p_id] = new List(p_id);
 			return groups[p_id];
 		}
 
