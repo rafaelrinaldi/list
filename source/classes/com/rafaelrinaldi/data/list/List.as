@@ -28,6 +28,9 @@ package com.rafaelrinaldi.data.list
 		public var id : String;
 		public var allowOverride : Boolean;
 		
+		// <code>List</code> instances created.
+		protected static var instances : int = 0;
+		
 		/**
 		 * @param p_id List id ("null" by default).
 		 * @param p_allowOverride Allow override option ("true" by default).
@@ -37,6 +40,8 @@ package com.rafaelrinaldi.data.list
 			id = p_id;
 			allowOverride = p_allowOverride;
 			
+			if(id == "") id = uniqueID;
+			
 			// Enable week keys by default.
 			items = new Dictionary(true);
 			groups = new Dictionary(true);
@@ -44,6 +49,8 @@ package com.rafaelrinaldi.data.list
 			restrict = new Vector.<Class>();
 			
 			ids = new Vector.<String>();
+			
+			++instances;
 		}
 
 		/**
@@ -162,7 +169,9 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function item( p_id : String ) : *
 		{
-			return items.hasOwnProperty(p_id) ? printf(ListItem(items[p_id]).value, items) : null;
+			var value : * = ListItem(items[p_id]).value;
+			
+			return value is String ? printf(value, items) : value;
 		}
 
 		/**
@@ -230,6 +239,46 @@ package com.rafaelrinaldi.data.list
 			
 			return this;
 		}
+
+		/**
+		 * Same idea from MultiMap's <code>toListString()</code>.
+		 * @see http://blog.hexagonstar.com/as3_multimap_class
+		 * @return A <code>String</code> version of list data.
+		 */
+		public function toListString() : String
+		{
+			var stack : String;
+			var item : ListItem;
+			var list : List;
+			
+			stack = id;
+			
+			for each(item in items) {
+				stack += "\n\t" + item.id + " -> " + item.value;
+			}
+			
+			for each(list in groups) {
+				
+				stack += "\n\n\t" + list.id;
+				
+				for each(item in list.items) {
+					stack += "\n\t\t" + item.id + " -> " + item.value;
+				}
+				
+			}
+			
+			return stack;
+		}
+		
+		/**
+		 * Same idea from BulkLoader's <code>getUniqueName()</code>.
+		 * @see https://github.com/arthur-debert/BulkLoader/blob/master/src/br/com/stimuli/loading/BulkLoader.as#L419
+		 * @return A unique string ID.
+		 */
+		protected function get uniqueID() : String
+		{
+			return "List_" + instances;
+		}
 		
 		/**
 		 * @return List length.
@@ -243,7 +292,7 @@ package com.rafaelrinaldi.data.list
 			
 			return count;
 		}
-
+		
 		// Destroy all lists and all references.
 		public function dispose() : void
 		{

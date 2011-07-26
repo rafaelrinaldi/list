@@ -33,6 +33,7 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `index` - Get an item based on a numeric index.
 - `match` - Match some id or value.
 - `reset` - Start from scratch.
+- `toListString` - Print the `List` instance as `String`.
 - `length` - List length.
 - `dispose` - Clear from memory.
 
