@@ -13,26 +13,29 @@ package com.rafaelrinaldi.data.list
 	 */
 	public class List implements IDisposable
 	{
-		// Single items list.
+		/** Single items list. **/
 		public var items : Dictionary;
 		
-		// Group items list.
+		/** Group items list. **/
 		public var groups : Dictionary;
 		
-		// Restrict values.
+		/** A <code>Vector</code> of <code>Class</code> to restrict values by object type. **/
 		public var restrict : Vector.<Class>;
 		
-		// All registered ids.
+		/** All registered ids. **/
 		public var ids : Vector.<String>;
 		
+		/** <code>List</code> id. **/
 		public var id : String;
+		
+		/** Allow override? **/
 		public var allowOverride : Boolean;
 		
-		// <code>List</code> instances created.
+		/** <code>List</code> instances created. **/
 		protected static var instances : int = 0;
 		
 		/**
-		 * @param p_id List id ("null" by default).
+		 * @param p_id List id ("" by default).
 		 * @param p_allowOverride Allow override option ("true" by default).
 		 */
 		public function List( p_id : String = "", p_allowOverride : Boolean = true )
@@ -54,32 +57,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
-		 * The XML format must be:
-		 * <code>
-		 * 
-		 * <!-- These initial parameters aren't required. -->
-		 * <list id='' allowOverride=''>
-		 * 
-		 * 		<!-- The restriction list -->
-		 * 		<restrict>
-		 * 			<!-- Must be the qualified class name. E.g.: com.display.BitmapData
-		 * 			<item></item>
-		 * 		</restrict>
-		 * 		
-		 * 		<!-- Your items goes here -->
-		 * 		<item></item>
-		 * 		
-		 * 		<!-- These initial parameters aren't required. -->
-		 * 		<group id='' allowOverride=''>
-		 *	
-		 *	 		<!-- Your items goes here -->
-		 * 			<item></item>
-		 * 			
-		 * 		</group>
-		 * 		
-		 * </list>
-		 * 
-		 * </code>
+		 * Feed the list with XML data.
 		 * @see ListDecoder
 		 * @param p_data Feed the list with XML data.
 		 */
@@ -89,6 +67,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Export list data as XML.
 		 * @return Create a XML using current <code>List</code> data.
 		 */
 		public function export() : XML
@@ -97,6 +76,7 @@ package com.rafaelrinaldi.data.list
 		}
 		
 		/**
+		 * Clone the current instance.
 		 * @return A copy of the current <code>List</code> instance.
 		 */
 		public function clone() : List
@@ -109,7 +89,7 @@ package com.rafaelrinaldi.data.list
 		}
 		
 		/**
-		 * Merge a <code>List</code> instance into the current.
+		 * Merge a list with another one.
 		 * @param p_list List to be merged.
 		 */
 		public function merge( p_list : List ) : void
@@ -146,6 +126,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Add a new list entry.
 		 * @param p_id New item id.
 		 * @param p_value New item value.
 		 * @return Current scope.
@@ -174,6 +155,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Remove a list entry.
 		 * @param p_id Item id.
 		 * @return Current scope.
 		 */
@@ -191,6 +173,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Get a single item.
 		 * @param p_id Item id.
 		 * @return Item value.
 		 */
@@ -202,6 +185,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Get a group item.
 		 * @param p_id Group id.
 		 * @return Group list.
 		 */
@@ -213,6 +197,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Get an item based on a numeric index.
 		 * @param p_index Item index.
 		 * @return Item value based on his index.
 		 */
@@ -222,6 +207,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Match some id or value.
 		 * @param p_query Query to match. It can be the id or the value, doesn't matter.
 		 * @return "true" if the query matches something, "false" otherwise.
 		 */
@@ -240,6 +226,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Clear items from a <code>Dictionary</code> instance.
 		 * @param p_dictionary Dictionary instance to be cleaned.
 		 */
 		protected function clearList( p_dictionary : Dictionary ) : void
@@ -251,6 +238,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * Start from scratch.
 		 * @param p_everything Reset items and groups as well? ("false" by default)
 		 */
 		public function reset( p_everything : Boolean = false ) : List
@@ -268,7 +256,7 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
-		 * Same idea from MultiMap's <code>toListString()</code>.
+		 * Print the <code>List</code> instance as <code>String</code>.
 		 * @see http://blog.hexagonstar.com/as3_multimap_class
 		 * @return A <code>String</code> version of list data.
 		 */
@@ -299,7 +287,7 @@ package com.rafaelrinaldi.data.list
 		
 		/**
 		 * Same idea from BulkLoader's <code>getUniqueName()</code>.
-		 * @see https://github.com/arthur-debert/BulkLoader/blob/master/src/br/com/stimuli/loading/BulkLoader.as#L419
+		 * @see http://github.com/arthur-debert/BulkLoader/blob/master/src/br/com/stimuli/loading/BulkLoader.as
 		 * @return A unique string ID.
 		 */
 		protected function get uniqueID() : String
@@ -308,7 +296,8 @@ package com.rafaelrinaldi.data.list
 		}
 		
 		/**
-		 * @return List length.
+		 * List length.
+		 * @return current list length.
 		 */
 		public function get length() : int
 		{
@@ -320,7 +309,7 @@ package com.rafaelrinaldi.data.list
 			return count;
 		}
 		
-		// Destroy all lists and all references.
+		// Clear from memory.
 		public function dispose() : void
 		{
 			reset(true);

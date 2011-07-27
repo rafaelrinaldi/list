@@ -9,7 +9,8 @@ package com.rafaelrinaldi.data.list
 	/**
 	 * 
 	 * List decoder class.
-	 *
+	 * 
+	 * @see http://misc.rafaelrinaldi.com/github/list/list.xml
 	 * @author Rafael Rinaldi (rafaelrinaldi.com)
 	 * @since Jul 14, 2011
 	 *
@@ -18,6 +19,7 @@ package com.rafaelrinaldi.data.list
 	public class ListDecoder
 	{
 		/**
+		 * Decode XML data.
 		 * @param p_data Data to be decoded.
 		 * @return A <code>List</code> instance with decoded data.
 		 */

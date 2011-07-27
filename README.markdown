@@ -1,3 +1,4 @@
+[asdoc]: http://github.com/rafaelrinaldi/list/blob/master/asdoc
 [license]: http://github.com/rafaelrinaldi/list/blob/master/license.txt
 [printf]: http://github.com/arthur-debert/printf-as3
 
@@ -96,6 +97,8 @@ Handy way to manipulate lists with ActionScript 3.0.
 	// List length.
 	trace(list.length); // 6
 	trace(list.group("numbers").length); // 3
+
+For a complete code reference, check the [documentation][asdoc].
 
 ---
 ### License

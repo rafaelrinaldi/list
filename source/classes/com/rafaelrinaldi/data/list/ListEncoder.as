@@ -11,6 +11,11 @@ package com.rafaelrinaldi.data.list
 	 */
 	public class ListEncoder
 	{
+		/**
+		 * Encode the data from a <code>List</code> instance into <code>XML</code> data.
+		 * @param p_data Data to be encoded.
+		 * @return Encoded data.
+		 */
 		public static function encode( p_data : List ) : XML
 		{
 			var item : ListItem;
