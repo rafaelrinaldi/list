@@ -38,5 +38,65 @@ Handy way to manipulate lists with ActionScript 3.0.
 - `dispose` - Clear from memory.
 
 ---
+### Usage
+
+	// Creating the list.
+	var list : List = new List("foo");
+	list.add("name", "Rafael Rinaldi");
+	list.add("website", "rafaelrinaldi.com");
+	list.add("message", "I'm %(name)s and my website is %(website)s"); // Dynamic values supported by printf
+	
+	trace(list.item("message")); // I'm Rafael Rinaldi and my website is rafaelrinaldi.com
+	
+	// Using groups.
+	list.group("math").add("pi", Math.PI).add("max", int.MAX_VALUE);
+	
+	trace(list.group("math").item("pi")); // 3.141592653589793
+	trace(list.group("math").item("max")); // 2147483647
+	
+	// Matching ids.
+	
+	trace(list.match("message")); // true
+	
+	// Adding different kind of values to the list.
+	
+	var bitmap : Bitmap =  new Bitmap();
+	var point : Point = new Point(10, 10);
+	
+	function callback() : void {};
+	
+	list.add("bitmap", bitmap);
+	list.add("point", point);
+	list.add("callback", callback);
+	
+	trace(list.item("bitmap")); // [object Bitmap]
+	trace(list.item("point")); // (x=10, y=10)
+	trace(list.item("callback")); // function Function() {}
+	
+	// Matching values.
+	
+	trace(list.match(bitmap)); // true
+	trace(list.match(point)); // true
+	trace(list.match(callback)); // true
+	
+	// Adding restrictions by object type.
+	list.group("numbers").restrict.push(Number);
+	list.group("numbers").add("one", 1).add("year", 2011).add("one_hundred", 100);
+	list.group("numbers").add("string", "I'm an String");
+	
+	trace(list.group("numbers").item("one")); // 1
+	trace(list.group("numbers").item("year")); // 2011
+	trace(list.group("numbers").item("one_hundred")); // 100
+	trace(list.group("numbers").item("string")); // null
+	
+	// Getting items by index.
+	trace(list.index(0)); // Rafael Rinaldi
+	trace(list.index(1)); // rafaelrinaldi.com
+	
+	// List length.
+	trace(list.length); // 6
+	trace(list.group("numbers").length); // 3
+
+---
 ### License
 [WTFPL][license]

@@ -54,6 +54,33 @@ package com.rafaelrinaldi.data.list
 		}
 
 		/**
+		 * The XML format must be:
+		 * <code>
+		 * 
+		 * <!-- These initial parameters aren't required. -->
+		 * <list id='' allowOverride=''>
+		 * 
+		 * 		<!-- The restriction list -->
+		 * 		<restrict>
+		 * 			<!-- Must be the qualified class name. E.g.: com.display.BitmapData
+		 * 			<item></item>
+		 * 		</restrict>
+		 * 		
+		 * 		<!-- Your items goes here -->
+		 * 		<item></item>
+		 * 		
+		 * 		<!-- These initial parameters aren't required. -->
+		 * 		<group id='' allowOverride=''>
+		 *	
+		 *	 		<!-- Your items goes here -->
+		 * 			<item></item>
+		 * 			
+		 * 		</group>
+		 * 		
+		 * </list>
+		 * 
+		 * </code>
+		 * @see ListDecoder
 		 * @param p_data Feed the list with XML data.
 		 */
 		public function from( p_data : XML ) : void
