@@ -179,7 +179,7 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function item( p_id : String ) : *
 		{
-			var value : * = ListItem(items[p_id]).value;
+			var value : * = items[p_id]["value"];
 			
 			return value is String ? printf(value, items) : value;
 		}
