@@ -1,4 +1,4 @@
-[asdoc]: http://github.com/rafaelrinaldi/list/blob/master/asdoc
+[asdoc]: http://rafaelrinaldi.github.com/list/asdoc
 [license]: http://github.com/rafaelrinaldi/list/blob/master/license.txt
 [printf]: http://github.com/arthur-debert/printf-as3
 
