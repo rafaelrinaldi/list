@@ -31,6 +31,9 @@ package com.rafaelrinaldi.data.list
 		/** Allow override? **/
 		public var allowOverride : Boolean;
 		
+		/** You can specify a class to be returned as list. **/
+		public var listClass : Class;
+		
 		/** <code>List</code> instances created. **/
 		protected static var instances : int = 0;
 		
@@ -42,6 +45,8 @@ package com.rafaelrinaldi.data.list
 		{
 			id = p_id;
 			allowOverride = p_allowOverride;
+			
+			listClass = List;
 			
 			if(id == "") id = uniqueID;
 			
@@ -79,9 +84,9 @@ package com.rafaelrinaldi.data.list
 		 * Clone the current instance.
 		 * @return A copy of the current <code>List</code> instance.
 		 */
-		public function clone() : List
+		public function clone() : *
 		{
-			var list : List = new List(id, allowOverride);
+			var list : List = new listClass(id, allowOverride);
 			list.restrict = restrict;
 			list.items = items;
 			list.groups = groups;
@@ -189,10 +194,10 @@ package com.rafaelrinaldi.data.list
 		 * @param p_id Group id.
 		 * @return Group list.
 		 */
-		public function group( p_id : String ) : List
+		public function group( p_id : String ) : *
 		{
 			// If there's no group with passed id, create a new one.
-			if(!groups.hasOwnProperty(p_id)) groups[p_id] = new List(p_id);
+			if(!groups.hasOwnProperty(p_id)) groups[p_id] = new listClass(p_id);
 			return groups[p_id];
 		}
 
@@ -203,7 +208,7 @@ package com.rafaelrinaldi.data.list
 		 */
 		public function index( p_index : int ) : *
 		{
-			return items[ids[p_index]];
+			return items[ids[p_index]]["value"];
 		}
 
 		/**
@@ -218,7 +223,7 @@ package com.rafaelrinaldi.data.list
 			hasId = items.hasOwnProperty(p_query);
 			
 			for(var id : String in items) {
-				hasValue = ListItem(items[id]).match(p_query);
+				hasValue = (items[id] as ListItem).match(p_query);
 				if(hasValue) break;
 			}
 			
@@ -232,7 +237,7 @@ package com.rafaelrinaldi.data.list
 		protected function clearList( p_dictionary : Dictionary ) : void
 		{
 			for(var id : String in p_dictionary) {
-				IDisposable(p_dictionary[id]).dispose();
+				(p_dictionary[id] as IDisposable).dispose();
 				delete p_dictionary[id];
 			}
 		}
