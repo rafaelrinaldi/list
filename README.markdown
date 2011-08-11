@@ -1,6 +1,7 @@
 [asdoc]: http://rafaelrinaldi.github.com/list/asdoc
-[license]: http://github.com/rafaelrinaldi/list/blob/master/license.txt
-[printf]: http://github.com/arthur-debert/printf-as3
+[license]: https://github.com/rafaelrinaldi/list/raw/master/license.txt
+[printf]: https://github.com/arthur-debert/printf-as3
+[fdt]: http://fdt.powerflasher.com
 
 # list
 Handy way to manipulate lists with ActionScript 3.0.
@@ -103,3 +104,6 @@ For a complete code reference, check the [documentation][asdoc].
 ---
 ### License
 [WTFPL][license]
+
+---
+<small>Made with ♥ using [FDT][fdt].</small>
